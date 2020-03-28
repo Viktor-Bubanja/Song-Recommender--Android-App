@@ -1,0 +1,69 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.songrecommender"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="18"
+8-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->[:spotify-auth-release-1.2.3] /Users/viktorbubanja/Desktop/SENG440/song-recommender/spotify-auth-release-1.2.3/build/.transforms/9b87c50634de1210bd2e93fa2d43207b/jetified-spotify-auth-release-1.2.3/AndroidManifest.xml:31:5-67
+11-->[:spotify-auth-release-1.2.3] /Users/viktorbubanja/Desktop/SENG440/song-recommender/spotify-auth-release-1.2.3/build/.transforms/9b87c50634de1210bd2e93fa2d43207b/jetified-spotify-auth-release-1.2.3/AndroidManifest.xml:31:22-64
+12
+13    <application
+13-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:5:5-23:19
+14        android:name="androidx.multidex.MultiDexApplication"
+14-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:6:9-61
+15        android:allowBackup="true"
+15-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:7:9-35
+16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+16-->[androidx.core:core:1.2.0] /Users/viktorbubanja/.gradle/caches/transforms-2/files-2.1/2ad9f1c0e0d3c45db058d2a1a66b7860/core-1.2.0/AndroidManifest.xml:24:18-86
+17        android:debuggable="true"
+18        android:icon="@mipmap/ic_launcher"
+18-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:8:9-43
+19        android:label="@string/app_name"
+19-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:9:9-41
+20        android:roundIcon="@mipmap/ic_launcher_round"
+20-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:10:9-54
+21        android:supportsRtl="true"
+21-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:11:9-35
+22        android:testOnly="true"
+23        android:theme="@style/AppTheme" >
+23-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:12:9-40
+24        <activity android:name="com.example.songrecommender.PlaylistActivity" />
+24-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:13:9-63
+24-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:13:19-51
+25        <activity
+25-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:14:9-16:67
+26            android:name="com.example.songrecommender.PlayerActivity"
+26-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:15:13-43
+27            android:parentActivityName="com.example.songrecommender.MainActivity" />
+27-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:16:13-55
+28        <activity android:name="com.example.songrecommender.MainActivity" >
+28-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:17:9-22:20
+28-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:17:19-47
+29            <intent-filter>
+29-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:18:13-21:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:19:17-69
+30-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:19:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:20:17-77
+32-->/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/src/main/AndroidManifest.xml:20:27-74
+33            </intent-filter>
+34        </activity>
+35        <activity
+35-->[:spotify-auth-release-1.2.3] /Users/viktorbubanja/Desktop/SENG440/song-recommender/spotify-auth-release-1.2.3/build/.transforms/9b87c50634de1210bd2e93fa2d43207b/jetified-spotify-auth-release-1.2.3/AndroidManifest.xml:34:9-37:20
+36            android:name="com.spotify.sdk.android.auth.LoginActivity"
+36-->[:spotify-auth-release-1.2.3] /Users/viktorbubanja/Desktop/SENG440/song-recommender/spotify-auth-release-1.2.3/build/.transforms/9b87c50634de1210bd2e93fa2d43207b/jetified-spotify-auth-release-1.2.3/AndroidManifest.xml:35:13-70
+37            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+37-->[:spotify-auth-release-1.2.3] /Users/viktorbubanja/Desktop/SENG440/song-recommender/spotify-auth-release-1.2.3/build/.transforms/9b87c50634de1210bd2e93fa2d43207b/jetified-spotify-auth-release-1.2.3/AndroidManifest.xml:36:13-72
+38        </activity>
+39    </application>
+40
+41</manifest>

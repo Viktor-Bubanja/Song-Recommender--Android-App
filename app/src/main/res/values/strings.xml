@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SongRecommender</string>
+    <string name="back">Back</string>
+    <string name="searching">Searching...</string>
+    <string name="search">Search</string>
+    <string name="genre">Genre</string>
+    <string name="emotion">Emotion</string>
+    <string name="danceability">Danceability</string>
+    <string name="acoustic">Acoustic</string>
+    <string name="sad">Sad</string>
+    <string name="happy">Happy</string>
+    <string name="low">Low</string>
+    <string name="high">High</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+</resources>
