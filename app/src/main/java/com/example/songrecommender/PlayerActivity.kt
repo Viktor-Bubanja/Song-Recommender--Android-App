@@ -39,8 +39,7 @@ class PlayerActivity() : Activity() {
         }
 
         saveButton.setOnClickListener {
-            val intent = Intent(this, PlaylistActivity::class.java)
-            startActivity(intent)
+            SpotifyService.saveTrack()
         }
     }
 

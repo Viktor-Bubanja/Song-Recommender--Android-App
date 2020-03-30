@@ -2,6 +2,7 @@
     <string name="app_name">SongRecommender</string>
     <string name="back">Back</string>
     <string name="searching">Searching...</string>
+    <string name="failed">Couldn\'t find a song! Please try again with different attributes</string>
     <string name="search">Search</string>
     <string name="genre">Genre</string>
     <string name="emotion">Emotion</string>
@@ -13,5 +14,17 @@
     <string name="high">High</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="pop">Pop</string>
+
+    <string-array name="genres">
+        <item>@string/pop</item>
+        <item>Ambient</item>
+        <item>Electronic</item>
+        <item>Hip-hop</item>
+        <item>Indie-pop</item>
+        <item>Metal</item>
+        <item>Techno</item>
+        <item>Country</item>
+    </string-array>
 
 </resources>

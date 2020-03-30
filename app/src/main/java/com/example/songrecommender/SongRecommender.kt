@@ -9,11 +9,11 @@ import com.adamratzman.spotify.models.Track
 import com.adamratzman.spotify.utils.Market
 import java.lang.ref.WeakReference
 
-class SongRecommender(activity: MainActivity): AsyncTask<SpotifyClientApi, Void, Void> () {
+class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWrapper): AsyncTask<SpotifyClientApi, Void, List<Track>?> () {
 
     private var context = WeakReference(activity)
 
-    override fun doInBackground(vararg apis: SpotifyClientApi?): Void? {
+    override fun doInBackground(vararg apis: SpotifyClientApi?): List<Track>? {
         // Only one API will ever be passed into the function so simply take the first item from
         // the list.
         assert(apis.size == 1)
@@ -23,31 +23,41 @@ class SongRecommender(activity: MainActivity): AsyncTask<SpotifyClientApi, Void,
         if (!recommendedSongs.isNullOrEmpty()) {
             playTrack(api, recommendedSongs)
         }
-        return null
+        return recommendedSongs
     }
 
-    override fun onPostExecute(result: Void?) {
-        super.onPostExecute(result)
-        context.get()?.showPlayer()
+    override fun onPostExecute(recommendedSongs: List<Track>?) {
+        super.onPostExecute(recommendedSongs)
+        if (recommendedSongs.isNullOrEmpty()) {
+            context.get()?.showFailedToast()
+        } else {
+            context.get()?.showPlayer()
+        }
     }
 
     private fun getRecommendedTracks(api: SpotifyClientApi?): List<Track>? {
         return api?.browse?.getTrackRecommendations(
-            seedGenres = listOf("pop"),
-            targetAttributes = listOf(
-                TrackAttribute.create(TuneableTrackAttribute.Danceability, 0.5f),
-                TrackAttribute.create(TuneableTrackAttribute.Valence, 0.2f)),
+            seedGenres = listOf(attributes.genre),
+            targetAttributes = constructTrackAttributes(attributes),
             market = Market.NZ)?.complete()?.tracks
+    }
+
+    private fun constructTrackAttributes(attributes: SearchAttributesWrapper): List<TrackAttribute<Float>> {
+        val trackAttributes = mutableListOf<TrackAttribute<Float>>()
+
+        attributes.emotionAttribute?.let {trackAttributes.add(attributes.emotionAttribute)}
+        attributes.danceabilityAttribute?.let {trackAttributes.add(attributes.danceabilityAttribute)}
+        attributes.acousticnessAttribute?.let {trackAttributes.add(attributes.acousticnessAttribute)}
+
+        return trackAttributes
     }
 
     private fun playTrack(api: SpotifyClientApi?, recommendedSongs: List<Track>) {
         recommendedSongs.shuffled().map { track -> track.uri.uri }
         val shuffledSongUris = recommendedSongs.shuffled().map { track -> track.uri.uri }
-        Log.d("AAA", shuffledSongUris[0].toString())
+        Log.d("AAA", shuffledSongUris[0])
         val devices = api?.player?.getDevices()?.complete()
         Log.d("AAA", devices.toString())
-        api?.player?.startPlayback(
-            tracksToPlay = shuffledSongUris,
-            deviceId = devices?.get(0)?.id.toString())?.complete()
+        SpotifyService.play(shuffledSongUris, devices?.get(0)?.id.toString())
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="maximum">2</integer>
+    <integer name="minimum">0</integer>
+    <integer name="step">1</integer>
+</resources>

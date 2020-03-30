@@ -1,7 +1,11 @@
 package com.example.songrecommender
 
+import android.util.Log
 import com.adamratzman.spotify.SpotifyApi
 import com.adamratzman.spotify.SpotifyClientApi
+import com.adamratzman.spotify.SpotifyRestAction
+import com.adamratzman.spotify.endpoints.client.LibraryType
+import com.adamratzman.spotify.models.CurrentlyPlayingObject
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 
@@ -20,6 +24,7 @@ object SpotifyService {
                 "user-read-currently-playing",
                 "user-modify-playback-state",
                 "user-read-playback-state",
+                "user-library-modify",
                 "app-remote-control",
                 "streaming"
 
@@ -45,5 +50,17 @@ object SpotifyService {
 
     fun resume() {
         api?.player?.resume()?.complete()
+    }
+
+    fun play(songsToPlay: List<String>, deviceId: String) {
+        api?.player?.startPlayback(
+            tracksToPlay = songsToPlay,
+            deviceId = deviceId)?.complete()
+    }
+
+    fun saveTrack() {
+        val songId = api?.player?.getCurrentlyPlaying()?.complete()?.track?.id
+        Log.d("AAA", songId.toString())
+        api?.library?.add(LibraryType.TRACK, songId!!)?.complete()
     }
 }

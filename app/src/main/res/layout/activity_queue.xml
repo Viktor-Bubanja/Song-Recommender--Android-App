@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaylistActivity">
+    tools:context=".QueueActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlistPicker"
+        android:id="@+id/trackPicker"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
