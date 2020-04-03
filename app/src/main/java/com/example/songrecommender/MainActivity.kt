@@ -11,20 +11,32 @@ import com.spotify.sdk.android.auth.AuthorizationClient
 class MainActivity : AppCompatActivity() {
 
     private var loggedIn = false
-
     private var searchingToast: Toast? = null
-
     private var failedToast: Toast? = null
+
+    private lateinit var genreSpinner: Spinner
+    private lateinit var emotionSeekBar: SeekBar
+    private lateinit var danceSeekBar: SeekBar
+    private lateinit var acousticSeekBar: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val genreSpinner: Spinner = findViewById(R.id.genreSpinner)
-        val emotionSeekBar: SeekBar = findViewById(R.id.emotionSeekBar)
-        val danceSeekBar: SeekBar = findViewById(R.id.danceSeekBar)
-        val acousticSeekBar: SeekBar = findViewById(R.id.acousticSeekBar)
+        genreSpinner = findViewById(R.id.genreSpinner)
+        emotionSeekBar = findViewById(R.id.emotionSeekBar)
+        danceSeekBar = findViewById(R.id.danceSeekBar)
+        acousticSeekBar = findViewById(R.id.acousticSeekBar)
         val searchButton: Button = findViewById(R.id.searchButton)
+
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                genreSpinner.setSelection(getInt(GENRE_INDEX))
+                emotionSeekBar.progress = getInt(EMOTION)
+                danceSeekBar.progress = getInt(DANCEABILITY)
+                acousticSeekBar.progress = getInt(ACOUSTIC)
+            }
+        }
 
         ArrayAdapter.createFromResource(
             this,
@@ -86,5 +98,27 @@ class MainActivity : AppCompatActivity() {
 
     fun showFailedToast() {
         failedToast?.show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Save the user's current game state
+        outState.run {
+            putInt(GENRE_INDEX, genreSpinner.selectedItemPosition)
+            putInt(EMOTION, emotionSeekBar.progress)
+            putInt(DANCEABILITY, danceSeekBar.progress)
+            putInt(ACOUSTIC, acousticSeekBar.progress)
+            putBoolean(LOGGED_IN, loggedIn)
+        }
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(outState)
+    }
+
+    companion object {
+        const val GENRE_INDEX = "genre"
+        const val EMOTION = "emotion"
+        const val DANCEABILITY = "danceability"
+        const val ACOUSTIC = "acoustic"
+        const val LOGGED_IN = "loggedIn"
     }
 }

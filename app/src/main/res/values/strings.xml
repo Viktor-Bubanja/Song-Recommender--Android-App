@@ -4,10 +4,13 @@
     <string name="searching">Searching...</string>
     <string name="failed">Couldn\'t find a song! Please try again with different attributes</string>
     <string name="search">Search</string>
+    <string name="allrecommendedsongs">All recommended songs</string>
+
     <string name="genre">Genre</string>
     <string name="emotion">Emotion</string>
     <string name="danceability">Danceability</string>
     <string name="acoustic">Acoustic</string>
+
     <string name="sad">Sad</string>
     <string name="happy">Happy</string>
     <string name="low">Low</string>

@@ -5,7 +5,7 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
+app/build/
 /captures
 .externalNativeBuild
 /app/src/main/java/com/example/songrecommender/SpotifyConstants

@@ -6,6 +6,7 @@ import com.adamratzman.spotify.SpotifyClientApi
 import com.adamratzman.spotify.SpotifyRestAction
 import com.adamratzman.spotify.endpoints.client.LibraryType
 import com.adamratzman.spotify.models.CurrentlyPlayingObject
+import com.adamratzman.spotify.models.Track
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 
@@ -13,6 +14,8 @@ import com.spotify.sdk.android.auth.AuthorizationResponse
 object SpotifyService {
 
     var api: SpotifyClientApi ?= null
+
+    var tracksToPlay: List<Track>? = null
 
     fun getAuthenticationRequest(type: AuthorizationResponse.Type): AuthorizationRequest {
         return AuthorizationRequest.Builder(SpotifyConstants.CLIENT_ID, type, SpotifyConstants.REDIRECT_URI)
@@ -52,10 +55,11 @@ object SpotifyService {
         api?.player?.resume()?.complete()
     }
 
-    fun play(songsToPlay: List<String>, deviceId: String) {
+    fun play(songsToPlay: List<String>) {
+        val devices = api?.player?.getDevices()?.complete()
         api?.player?.startPlayback(
             tracksToPlay = songsToPlay,
-            deviceId = deviceId)?.complete()
+            deviceId = devices?.get(0)?.id.toString())?.complete()
     }
 
     fun saveTrack() {

@@ -39,6 +39,7 @@ class PlayerActivity() : Activity() {
         }
 
         saveButton.setOnClickListener {
+            startActivity(Intent(this, QueueActivity::class.java))
             SpotifyService.saveTrack()
         }
     }
