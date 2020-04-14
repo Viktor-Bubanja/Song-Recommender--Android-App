@@ -1,7 +1,10 @@
 package com.example.songrecommender
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.spotify.sdk.android.auth.AuthorizationResponse
@@ -19,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var danceSeekBar: SeekBar
     private lateinit var acousticSeekBar: SeekBar
 
+    private lateinit var searchButton: Button
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         emotionSeekBar = findViewById(R.id.emotionSeekBar)
         danceSeekBar = findViewById(R.id.danceSeekBar)
         acousticSeekBar = findViewById(R.id.acousticSeekBar)
-        val searchButton: Button = findViewById(R.id.searchButton)
+        searchButton = findViewById(R.id.searchButton)
+        searchButton.visibility = View.GONE
 
         if (savedInstanceState != null) {
             with(savedInstanceState) {
@@ -69,14 +76,19 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_LONG)
 
         searchButton.setOnClickListener {
-            searchingToast?.show()
-            val searchAttributes = SearchAttributesWrapper(
-                genreSpinner.selectedItem.toString(),
-                emotionSeekBar.progress,
-                danceSeekBar.progress,
-                acousticSeekBar.progress,
-                this.resources.getInteger(R.integer.maximum))
-            SongRecommender(this, searchAttributes).execute(SpotifyService.api)
+            try {
+                searchingToast?.show()
+                val searchAttributes = SearchAttributesWrapper(
+                    genreSpinner.selectedItem.toString(),
+                    emotionSeekBar.progress,
+                    danceSeekBar.progress,
+                    acousticSeekBar.progress,
+                    this.resources.getInteger(R.integer.maximum)
+                )
+                SongRecommender(this, searchAttributes).execute(SpotifyService.api)
+            } catch (e: Exception) {
+                Log.e("MainActivity", e.message)
+            }
         }
     }
 
@@ -87,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             val accessToken: String? = response.accessToken
             SpotifyService.setApi(accessToken)
             loggedIn = true
+            searchButton.visibility = View.VISIBLE
         }
     }
 

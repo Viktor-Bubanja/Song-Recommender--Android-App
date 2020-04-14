@@ -1,0 +1,8 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/triangle_vector_drawable">
+
+    <target
+        android:animation="@animator/color_change_animator"
+        android:name="triangle"/>
+
+</animated-vector>

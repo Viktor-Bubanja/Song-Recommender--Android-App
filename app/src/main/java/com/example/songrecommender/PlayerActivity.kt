@@ -2,34 +2,63 @@ package com.example.songrecommender
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_player.*
 
 
 class PlayerActivity() : Activity() {
 
+    private lateinit var playAnimation: AnimationDrawable
+    private lateinit var pauseAnimation: AnimationDrawable
+    private lateinit var playButton: ImageButton
+    private lateinit var pauseButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
-        val playButton: ImageButton = findViewById(R.id.playButton)
-        val pauseButton: ImageButton = findViewById(R.id.pauseButton)
         val backButton: Button = findViewById(R.id.backButton)
         val saveButton: Button = findViewById(R.id.saveButton)
+
+        playButton = findViewById<ImageButton>(R.id.playButton).apply {
+            setBackgroundResource(R.drawable.play_animation)
+            playAnimation = background as AnimationDrawable
+        }
+
+        pauseButton = findViewById<ImageButton>(R.id.pauseButton).apply {
+            setBackgroundResource(R.drawable.pause_animation)
+            pauseAnimation = background as AnimationDrawable
+        }
 
         showPauseButton()
 
         playButton.setOnClickListener {
-            SpotifyService.resume()
-            showPauseButton()
+            if (SpotifyService.isPlaying()) {
+                showPauseButton()
+                pauseAnimation.start()
+                PauseTrack(SpotifyService.api).execute()
+            } else {
+                playAnimation.start()
+                ResumeTrack(SpotifyService.api).execute()
+            }
         }
 
         pauseButton.setOnClickListener {
-            SpotifyService.pause()
-            showPlayButton()
+
+            if (SpotifyService.isPlaying()) {
+                pauseAnimation.start()
+                PauseTrack(SpotifyService.api).execute()
+            } else {
+                showPlayButton()
+                playAnimation.start()
+                ResumeTrack(SpotifyService.api).execute()
+            }
         }
 
         backButton.setOnClickListener {

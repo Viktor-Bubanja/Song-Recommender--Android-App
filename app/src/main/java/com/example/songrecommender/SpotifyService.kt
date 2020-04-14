@@ -47,12 +47,8 @@ object SpotifyService {
         }.build()
     }
 
-    fun pause() {
-        api?.player?.pause()?.complete()
-    }
-
-    fun resume() {
-        api?.player?.resume()?.complete()
+    fun isPlaying(): Boolean {
+        return api?.player?.getCurrentlyPlaying()?.complete()?.isPlaying ?: false
     }
 
     fun play(songsToPlay: List<String>) {

@@ -1,0 +1,18 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/play_button_final" android:duration="5" />
+    <item android:drawable="@drawable/play_button13" android:duration="5" />
+    <item android:drawable="@drawable/play_button12" android:duration="5" />
+    <item android:drawable="@drawable/play_button11" android:duration="5" />
+    <item android:drawable="@drawable/play_button10" android:duration="10" />
+    <item android:drawable="@drawable/play_button9" android:duration="10" />
+    <item android:drawable="@drawable/play_button8" android:duration="10" />
+    <item android:drawable="@drawable/play_button7" android:duration="10" />
+    <item android:drawable="@drawable/play_button6" android:duration="20" />
+    <item android:drawable="@drawable/play_button5" android:duration="20" />
+    <item android:drawable="@drawable/play_button4" android:duration="20" />
+    <item android:drawable="@drawable/play_button3" android:duration="20" />
+    <item android:drawable="@drawable/play_button2" android:duration="30" />
+    <item android:drawable="@drawable/play_button1" android:duration="30" />
+    <item android:drawable="@drawable/pause_button" android:duration="30" />
+</animation-list>

@@ -19,7 +19,7 @@ class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWr
 
         val recommendedSongs = getRecommendedTracks(api)
         if (!recommendedSongs.isNullOrEmpty()) {
-            playTrack(api, recommendedSongs)
+            playTrack(recommendedSongs)
         }
         return recommendedSongs
     }
@@ -52,7 +52,7 @@ class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWr
         return trackAttributes
     }
 
-    private fun playTrack(api: SpotifyClientApi?, recommendedSongs: List<Track>) {
+    private fun playTrack(recommendedSongs: List<Track>) {
         recommendedSongs.shuffled().map { track -> track.uri.uri }
         val shuffledSongUris = recommendedSongs.shuffled().map { track -> track.uri.uri }
         SpotifyService.play(shuffledSongUris)

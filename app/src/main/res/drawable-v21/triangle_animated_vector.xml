@@ -1,0 +1,9 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/triangle_vector_drawable" >
+    <target
+        android:name="rotationGroup"
+        android:animation="@android:anim/bounce_interpolator" />
+    <target
+        android:name="v"
+        android:animation="@animator/color_change_animator" />
+</animated-vector>
