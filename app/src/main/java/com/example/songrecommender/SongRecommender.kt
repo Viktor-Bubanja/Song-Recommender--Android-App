@@ -1,27 +1,28 @@
 package com.example.songrecommender
 
 import android.os.AsyncTask
+import android.util.Log
 import com.adamratzman.spotify.SpotifyClientApi
 import com.adamratzman.spotify.endpoints.public.TrackAttribute
 import com.adamratzman.spotify.models.Track
 import com.adamratzman.spotify.utils.Market
 import java.lang.ref.WeakReference
 
-class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWrapper): AsyncTask<SpotifyClientApi, Void, List<Track>?> () {
+class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWrapper, var api: SpotifyClientApi?): AsyncTask<Void, Void, List<Track>?> () {
 
     private var context = WeakReference(activity)
 
-    override fun doInBackground(vararg apis: SpotifyClientApi?): List<Track>? {
-        // Only one API will ever be passed into the function so simply take the first item from
-        // the list.
-        assert(apis.size == 1)
-        val api = apis[0]
-
-        val recommendedSongs = getRecommendedTracks(api)
-        if (!recommendedSongs.isNullOrEmpty()) {
-            playTrack(recommendedSongs)
+    override fun doInBackground(vararg params: Void): List<Track>? {
+        return try {
+            val recommendedSongs = getRecommendedTracks(api)
+            if (!recommendedSongs.isNullOrEmpty()) {
+                playTrack(recommendedSongs)
+            }
+            recommendedSongs
+        } catch (e: Exception) {
+            Log.e("SongRecommender", e.message)
+            emptyList()
         }
-        return recommendedSongs
     }
 
     override fun onPostExecute(recommendedSongs: List<Track>?) {

@@ -63,4 +63,8 @@ object SpotifyService {
         Log.d("AAA", songId.toString())
         api?.library?.add(LibraryType.TRACK, songId!!)?.complete()
     }
+
+    fun getCurrentlyPlayingTrack(): Track? {
+        return api?.player?.getCurrentlyPlaying()?.complete()?.track
+    }
 }

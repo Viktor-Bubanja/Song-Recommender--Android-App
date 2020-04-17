@@ -25,6 +25,7 @@ class PlayerActivity() : Activity() {
 
         val backButton: Button = findViewById(R.id.backButton)
         val saveButton: Button = findViewById(R.id.saveButton)
+        val shareButton: Button = findViewById(R.id.shareButton)
 
         playButton = findViewById<ImageButton>(R.id.playButton).apply {
             setBackgroundResource(R.drawable.play_animation)
@@ -71,6 +72,18 @@ class PlayerActivity() : Activity() {
             startActivity(Intent(this, QueueActivity::class.java))
             SpotifyService.saveTrack()
         }
+
+       shareButton.setOnClickListener {
+           Log.d("AAA", SpotifyService.getCurrentlyPlayingTrack()?.externalUrls?.get(0).toString())
+           SpotifyService.getCurrentlyPlayingTrack().let {
+               val sharingIntent = Intent(Intent.ACTION_SEND).apply {
+                   type = "text/plain"
+                   putExtra(Intent.EXTRA_TEXT, it!!.externalUrls[0].url)
+               }
+               startActivity(Intent.createChooser(sharingIntent, "Share using"))
+           }
+
+       }
     }
 
     private fun showPlayButton() {

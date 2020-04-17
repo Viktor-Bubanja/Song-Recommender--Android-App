@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 danceSeekBar.progress = getInt(DANCEABILITY)
                 acousticSeekBar.progress = getInt(ACOUSTIC)
             }
+            searchButton.visibility = View.VISIBLE
         }
 
         ArrayAdapter.createFromResource(
@@ -50,9 +51,7 @@ class MainActivity : AppCompatActivity() {
             R.array.genres,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             genreSpinner.adapter = adapter
         }
 
@@ -76,19 +75,15 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_LONG)
 
         searchButton.setOnClickListener {
-            try {
-                searchingToast?.show()
-                val searchAttributes = SearchAttributesWrapper(
-                    genreSpinner.selectedItem.toString(),
-                    emotionSeekBar.progress,
-                    danceSeekBar.progress,
-                    acousticSeekBar.progress,
-                    this.resources.getInteger(R.integer.maximum)
-                )
-                SongRecommender(this, searchAttributes).execute(SpotifyService.api)
-            } catch (e: Exception) {
-                Log.e("MainActivity", e.message)
-            }
+            searchingToast?.show()
+            val searchAttributes = SearchAttributesWrapper(
+                genreSpinner.selectedItem.toString(),
+                emotionSeekBar.progress,
+                danceSeekBar.progress,
+                acousticSeekBar.progress,
+                this.resources.getInteger(R.integer.maximum)
+            )
+            SongRecommender(this, searchAttributes, SpotifyService.api).execute()
         }
     }
 
