@@ -3,12 +3,14 @@ package com.example.songrecommender
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_player.*
 
 
@@ -23,9 +25,11 @@ class PlayerActivity() : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
-        val backButton: Button = findViewById(R.id.backButton)
-        val saveButton: Button = findViewById(R.id.saveButton)
-        val shareButton: Button = findViewById(R.id.shareButton)
+        val backButton: ImageButton = findViewById(R.id.backButton)
+        val saveButton: ImageButton = findViewById(R.id.saveButton)
+        val removeButton: ImageButton = findViewById(R.id.removeButton)
+        val queueButton: ImageButton = findViewById(R.id.queueButton)
+        removeButton.visibility = View.INVISIBLE
 
         playButton = findViewById<ImageButton>(R.id.playButton).apply {
             setBackgroundResource(R.drawable.play_animation)
@@ -68,22 +72,25 @@ class PlayerActivity() : Activity() {
             startActivity(intent)
         }
 
-        saveButton.setOnClickListener {
+        queueButton.setOnClickListener {
             startActivity(Intent(this, QueueActivity::class.java))
-            SpotifyService.saveTrack()
         }
 
-       shareButton.setOnClickListener {
-           Log.d("AAA", SpotifyService.getCurrentlyPlayingTrack()?.externalUrls?.get(0).toString())
-           SpotifyService.getCurrentlyPlayingTrack().let {
-               val sharingIntent = Intent(Intent.ACTION_SEND).apply {
-                   type = "text/plain"
-                   putExtra(Intent.EXTRA_TEXT, it!!.externalUrls[0].url)
-               }
-               startActivity(Intent.createChooser(sharingIntent, "Share using"))
-           }
+        saveButton.setOnClickListener {
+            SpotifyService.saveCurrentTrack()
+            saveButton.visibility = View.INVISIBLE
+            removeButton.visibility = View.VISIBLE
+            Toast.makeText(this, getString(R.string.track_saved), Toast.LENGTH_SHORT)
+                .show()
+        }
 
-       }
+        removeButton.setOnClickListener {
+            SpotifyService.removeCurrentTrack()
+            removeButton.visibility = View.INVISIBLE
+            saveButton.visibility = View.VISIBLE
+            Toast.makeText(this, getString(R.string.track_removed), Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun showPlayButton() {

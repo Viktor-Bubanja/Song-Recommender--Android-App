@@ -9,7 +9,6 @@
         android:id="@+id/trackText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Track"
         android:textSize="18sp" />
 
 </LinearLayout>

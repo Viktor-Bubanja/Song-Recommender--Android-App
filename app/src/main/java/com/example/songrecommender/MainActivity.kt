@@ -1,14 +1,13 @@
 package com.example.songrecommender
 
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.spotify.sdk.android.auth.AuthorizationResponse
 import com.spotify.sdk.android.auth.AuthorizationClient
+import com.spotify.sdk.android.auth.AuthorizationResponse
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,19 +23,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var searchButton: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initialiseUI()
 
-        genreSpinner = findViewById(R.id.genreSpinner)
-        emotionSeekBar = findViewById(R.id.emotionSeekBar)
-        danceSeekBar = findViewById(R.id.danceSeekBar)
-        acousticSeekBar = findViewById(R.id.acousticSeekBar)
-        searchButton = findViewById(R.id.searchButton)
-        searchButton.visibility = View.GONE
+        if (!isSpotifyInstalled(packageManager)) {
+            startActivity(Intent(this, InstallSpotifyActivity::class.java))
+        }
 
+        Log.d("AAA", "create called")
         if (savedInstanceState != null) {
+            Log.d("AAA", "save insta state not null")
+            Log.d("AAA", savedInstanceState.toString())
             with(savedInstanceState) {
                 genreSpinner.setSelection(getInt(GENRE_INDEX))
                 emotionSeekBar.progress = getInt(EMOTION)
@@ -46,33 +45,21 @@ class MainActivity : AppCompatActivity() {
             searchButton.visibility = View.VISIBLE
         }
 
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.genres,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            genreSpinner.adapter = adapter
-        }
+        Log.d("AAA", "intent.toString()")
+        Log.d("AAA", intent.getBooleanExtra("loggedIn", false).toString())
 
         if (!intent.getBooleanExtra("loggedIn", false)) {
+            Log.d("AAA", "not logged in")
             val request = SpotifyService.getAuthenticationRequest(AuthorizationResponse.Type.TOKEN)
             AuthorizationClient.openLoginActivity(
                 this,
                 SpotifyConstants.AUTH_TOKEN_REQUEST_CODE,
                 request
             )
+        } else {
+            searchButton.visibility = View.VISIBLE
         }
 
-        searchingToast = Toast.makeText(
-            this@MainActivity,
-            getString(R.string.searching),
-            Toast.LENGTH_SHORT)
-
-        failedToast = Toast.makeText(
-            this@MainActivity,
-            getString(R.string.failed),
-            Toast.LENGTH_LONG)
 
         searchButton.setOnClickListener {
             searchingToast?.show()
@@ -109,7 +96,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        // Save the user's current game state
         outState.run {
             putInt(GENRE_INDEX, genreSpinner.selectedItemPosition)
             putInt(EMOTION, emotionSeekBar.progress)
@@ -118,8 +104,39 @@ class MainActivity : AppCompatActivity() {
             putBoolean(LOGGED_IN, loggedIn)
         }
 
-        // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(outState)
+    }
+
+    private fun createGenreDropdown() {
+        genreSpinner = findViewById(R.id.genreSpinner)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.genres,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            genreSpinner.adapter = adapter
+        }
+    }
+
+
+    private fun initialiseUI() {
+        emotionSeekBar = findViewById(R.id.emotionSeekBar)
+        danceSeekBar = findViewById(R.id.danceSeekBar)
+        acousticSeekBar = findViewById(R.id.acousticSeekBar)
+        searchButton = findViewById(R.id.searchButton)
+        searchButton.visibility = View.GONE
+
+        searchingToast = Toast.makeText(
+            this@MainActivity,
+            getString(R.string.searching),
+            Toast.LENGTH_SHORT)
+
+        failedToast = Toast.makeText(
+            this@MainActivity,
+            getString(R.string.failed),
+            Toast.LENGTH_LONG)
+        createGenreDropdown()
     }
 
     companion object {

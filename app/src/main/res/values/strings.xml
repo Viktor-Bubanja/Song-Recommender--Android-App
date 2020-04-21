@@ -2,9 +2,14 @@
     <string name="app_name">SongRecommender</string>
     <string name="back">Back</string>
     <string name="searching">Searching...</string>
-    <string name="failed">Couldn\'t find a song! Please try again with different attributes</string>
+    <string name="failed">Couldn\'t find a song! Please try again</string>
     <string name="search">Search</string>
-    <string name="allrecommendedsongs">All recommended songs</string>
+    <string name="all_recommended_songs">All recommended songs</string>
+    <string name="spotify_not_installed">Install Spotify to use this app</string>
+    <string name="install">Install</string>
+
+    <string name="track_saved">Song added to your Liked Songs</string>
+    <string name="track_removed">Song removed from your Liked Songs</string>
 
     <string name="genre">Genre</string>
     <string name="emotion">Emotion</string>

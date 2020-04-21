@@ -58,10 +58,14 @@ object SpotifyService {
             deviceId = devices?.get(0)?.id.toString())?.complete()
     }
 
-    fun saveTrack() {
+    fun saveCurrentTrack() {
         val songId = api?.player?.getCurrentlyPlaying()?.complete()?.track?.id
-        Log.d("AAA", songId.toString())
         api?.library?.add(LibraryType.TRACK, songId!!)?.complete()
+    }
+
+    fun removeCurrentTrack() {
+        val songId = api?.player?.getCurrentlyPlaying()?.complete()?.track?.id
+        api?.library?.remove(LibraryType.TRACK, songId!!)?.complete()
     }
 
     fun getCurrentlyPlayingTrack(): Track? {
