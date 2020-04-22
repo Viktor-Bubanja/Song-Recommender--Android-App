@@ -19,7 +19,6 @@ class QueueActivity: Activity() {
         setContentView(R.layout.activity_queue)
         val backButton: ImageButton = findViewById(R.id.backButton)
 
-
         trackPicker = findViewById(R.id.trackPicker)
         val layoutManager = LinearLayoutManager(this)
         trackPicker.layoutManager = layoutManager

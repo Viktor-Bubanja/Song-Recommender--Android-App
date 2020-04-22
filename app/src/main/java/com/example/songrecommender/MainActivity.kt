@@ -2,7 +2,6 @@ package com.example.songrecommender
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -32,10 +31,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, InstallSpotifyActivity::class.java))
         }
 
-        Log.d("AAA", "create called")
         if (savedInstanceState != null) {
-            Log.d("AAA", "save insta state not null")
-            Log.d("AAA", savedInstanceState.toString())
             with(savedInstanceState) {
                 genreSpinner.setSelection(getInt(GENRE_INDEX))
                 emotionSeekBar.progress = getInt(EMOTION)
@@ -45,11 +41,7 @@ class MainActivity : AppCompatActivity() {
             searchButton.visibility = View.VISIBLE
         }
 
-        Log.d("AAA", "intent.toString()")
-        Log.d("AAA", intent.getBooleanExtra("loggedIn", false).toString())
-
         if (!intent.getBooleanExtra("loggedIn", false)) {
-            Log.d("AAA", "not logged in")
             val request = SpotifyService.getAuthenticationRequest(AuthorizationResponse.Type.TOKEN)
             AuthorizationClient.openLoginActivity(
                 this,
@@ -59,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             searchButton.visibility = View.VISIBLE
         }
-
 
         searchButton.setOnClickListener {
             searchingToast?.show()

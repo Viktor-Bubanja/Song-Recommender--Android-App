@@ -55,7 +55,6 @@ class PlayerActivity() : Activity() {
         }
 
         pauseButton.setOnClickListener {
-
             if (SpotifyService.isPlaying()) {
                 pauseAnimation.start()
                 PauseTrack(SpotifyService.api).execute()
