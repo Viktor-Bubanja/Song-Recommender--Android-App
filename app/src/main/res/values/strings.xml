@@ -21,29 +21,25 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
 
-    <string name="pop">Pop</string>
-    <string name="pop_id">pop</string>
+    <string-array name="genre_labels">
+        <item>Pop</item>
+        <item>Ambient</item>
+        <item>Electronic</item>
+        <item>Hip hop</item>
+        <item>Indie pop</item>
+        <item>Metal</item>
+        <item>Techno</item>
+        <item>Country</item>
+    </string-array>
 
-    <string name="ambient">Ambient</string>
-    <string name="ambient_id">ambient</string>
-
-    <string name="electronic">Electronic</string>
-    <string name="electronic_id">electronic</string>
-
-    <string name="hip_hop">Hip hop</string>
-    <string name="hip_hop_id">hip-hop</string>
-
-    <string name="indie_pop">Indie pop</string>
-    <string name="indie_pop_id">indie-pop</string>
-
-    <string name="metal">Metal</string>
-    <string name="metal_id">metal</string>
-
-    <string name="techno">Techno</string>
-    <string name="techno_id">techno</string>
-
-    <string name="country">Country</string>
-    <string name="country_id">country</string>
-
-
+    <string-array name="genre_values">
+        <item>pop</item>
+        <item>ambient</item>
+        <item>electronic</item>
+        <item>hip-hop</item>
+        <item>indie-pop</item>
+        <item>metal</item>
+        <item>techno</item>
+        <item>country</item>
+    </string-array>
 </resources>

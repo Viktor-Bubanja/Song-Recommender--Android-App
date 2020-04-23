@@ -38,6 +38,7 @@ class PlayerActivity() : Activity() {
             playAnimation = background as AnimationDrawable
         }
 
+
         pauseButton = findViewById<ImageButton>(R.id.pauseButton).apply {
             setBackgroundResource(R.drawable.pause_animation)
             pauseAnimation = background as AnimationDrawable

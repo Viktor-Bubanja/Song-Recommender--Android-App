@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var searchButton: Button
 
-    lateinit var selectedGenre: String
+    private lateinit var genreValues: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +61,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         searchButton.setOnClickListener {
-            Log.d("AAA", selectedGenre)
             searchingToast?.show()
             val searchAttributes = SearchAttributesWrapper(
-                selectedGenre,
+                genreValues[genreSpinner.selectedItemPosition],
                 emotionSeekBar.progress,
                 danceSeekBar.progress,
                 acousticSeekBar.progress,
@@ -115,22 +114,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createGenreDropdown() {
-        val genres = getGenres()
+        genreValues = resources.getStringArray(R.array.genre_values).toList()
         genreSpinner = findViewById(R.id.genreSpinner)
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, genres)
-        genreSpinner.adapter = arrayAdapter
-
-        Log.d("AAA", "create genre called")
-
-        genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                Log.d("AAA", genres[position].toString())
-                selectedGenre = genres[position].key
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.genre_labels,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            genreSpinner.adapter = adapter
         }
-
     }
 
     private fun initialiseUI() {
@@ -150,19 +143,6 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.failed),
             Toast.LENGTH_LONG)
         createGenreDropdown()
-    }
-
-    private fun getGenres(): List<Genre> {
-        return listOf(
-            Genre(resources.getString(R.string.pop_id), resources.getString(R.string.pop)),
-            Genre(resources.getString(R.string.ambient_id), resources.getString(R.string.ambient)),
-            Genre(resources.getString(R.string.electronic_id), resources.getString(R.string.electronic)),
-            Genre(resources.getString(R.string.hip_hop_id), resources.getString(R.string.hip_hop)),
-            Genre(resources.getString(R.string.indie_pop_id), resources.getString(R.string.indie_pop)),
-            Genre(resources.getString(R.string.metal_id), resources.getString(R.string.metal)),
-            Genre(resources.getString(R.string.techno_id), resources.getString(R.string.techno)),
-            Genre(resources.getString(R.string.country_id), resources.getString(R.string.country))
-        )
     }
 
     companion object {
