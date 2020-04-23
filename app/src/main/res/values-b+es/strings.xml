@@ -3,7 +3,7 @@
     <string name="searching">Buscando…</string>
     <string name="failed">¡No pude encontrar una canción! Inténtalo de nuevo</string>
     <string name="search">Buscar</string>
-    <string name="spotify_not_installed">Instala Spotify para usar esta aplicación</string>
+    <string name="spotify_not_installed">Instala Spotify e inicia sesión para usar esta aplicación</string>
     <string name="install">Instalar</string>
 
     <string name="track_saved">Canción agregada a tus canciones favoritas</string>

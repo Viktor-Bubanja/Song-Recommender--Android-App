@@ -1,6 +1,0 @@
-<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
-    android:propertyName="fillColor"
-    android:duration="2000"
-    android:repeatCount="infinite"
-    android:valueFrom="@android:color/black"
-    android:valueTo="@android:color/holo_red_light"/>

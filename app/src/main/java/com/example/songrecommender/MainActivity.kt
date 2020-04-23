@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("AAA", "on creatae called")
         setContentView(R.layout.activity_main)
         initialiseUI()
 
@@ -93,7 +94,8 @@ class MainActivity : AppCompatActivity() {
     fun onSongSearchFail() {
         val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {
-            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
         } else {
             vibrator.vibrate(200)
         }
@@ -117,6 +119,8 @@ class MainActivity : AppCompatActivity() {
         genreSpinner = findViewById(R.id.genreSpinner)
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, genres)
         genreSpinner.adapter = arrayAdapter
+
+        Log.d("AAA", "create genre called")
 
         genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
