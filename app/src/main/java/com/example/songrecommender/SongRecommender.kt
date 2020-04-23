@@ -8,7 +8,9 @@ import com.adamratzman.spotify.models.Track
 import com.adamratzman.spotify.utils.Market
 import java.lang.ref.WeakReference
 
-class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWrapper, var api: SpotifyClientApi?): AsyncTask<Void, Void, List<Track>?> () {
+class SongRecommender(activity: MainActivity,
+                      val attributes: SearchAttributesWrapper,
+                      var api: SpotifyClientApi?): AsyncTask<Void, Void, List<Track>?> () {
 
     private var context = WeakReference(activity)
 
@@ -28,9 +30,9 @@ class SongRecommender(activity: MainActivity, val attributes: SearchAttributesWr
     override fun onPostExecute(recommendedSongs: List<Track>?) {
         super.onPostExecute(recommendedSongs)
         if (recommendedSongs.isNullOrEmpty()) {
-            context.get()?.showFailedToast()
+            context.get()?.onSongSearchFail()
         } else {
-            context.get()?.showPlayer()
+            context.get()?.onSongSearchSuccess()
         }
     }
 

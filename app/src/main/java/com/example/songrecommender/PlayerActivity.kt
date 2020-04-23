@@ -7,10 +7,7 @@ import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_player.*
 
 
@@ -28,8 +25,13 @@ class PlayerActivity() : Activity() {
         val backButton: ImageButton = findViewById(R.id.backButton)
         val saveButton: ImageButton = findViewById(R.id.saveButton)
         val removeButton: ImageButton = findViewById(R.id.removeButton)
+        val songText: TextView = findViewById(R.id.songText)
+        val artistText: TextView = findViewById(R.id.artistText)
         val queueButton: ImageButton = findViewById(R.id.queueButton)
         removeButton.visibility = View.INVISIBLE
+
+        songText.text = SpotifyService.getCurrentlyPlayingTrack()?.name
+        artistText.text = SpotifyService.getCurrentlyPlayingTrack()?.artists?.joinToString(", ") { it.name }
 
         playButton = findViewById<ImageButton>(R.id.playButton).apply {
             setBackgroundResource(R.drawable.play_animation)

@@ -84,20 +84,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showPlayer() {
+    fun onSongSearchSuccess() {
+        val intent = Intent(this, PlayerActivity::class.java)
+        searchingToast?.cancel()
+        startActivity(intent)
+    }
+
+    fun onSongSearchFail() {
         val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {
             vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
         } else {
             vibrator.vibrate(200)
         }
-
-        val intent = Intent(this, PlayerActivity::class.java)
-        searchingToast?.cancel()
-        startActivity(intent)
-    }
-
-    fun showFailedToast() {
         failedToast?.show()
     }
 
@@ -121,6 +120,7 @@ class MainActivity : AppCompatActivity() {
 
         genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                Log.d("AAA", genres[position].toString())
                 selectedGenre = genres[position].key
             }
 
