@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationResponse
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("AAA", "on creatae called")
         setContentView(R.layout.activity_main)
         initialiseUI()
 
@@ -49,18 +49,18 @@ class MainActivity : AppCompatActivity() {
             searchButton.visibility = View.VISIBLE
         }
 
-        if (!intent.getBooleanExtra("loggedIn", false)) {
-            val request = SpotifyService.getAuthenticationRequest(AuthorizationResponse.Type.TOKEN)
-            AuthorizationClient.openLoginActivity(
-                this,
-                SpotifyConstants.AUTH_TOKEN_REQUEST_CODE,
-                request
-            )
+        loggedIn = intent.getBooleanExtra("loggedIn", false)
+
+        if (!loggedIn) {
+            authorizeSpotify()
         } else {
             searchButton.visibility = View.VISIBLE
         }
 
         searchButton.setOnClickListener {
+            if (!loggedIn) {
+                authorizeSpotify()
+            }
             searchingToast?.show()
             val searchAttributes = SearchAttributesWrapper(
                 genreValues[genreSpinner.selectedItemPosition],
@@ -79,9 +79,18 @@ class MainActivity : AppCompatActivity() {
             val response = AuthorizationClient.getResponse(resultCode, data)
             val accessToken: String? = response.accessToken
             SpotifyService.setApi(accessToken)
-            loggedIn = true
+            loggedIn = accessToken != null
             searchButton.visibility = View.VISIBLE
         }
+    }
+
+    private fun authorizeSpotify() {
+        val request = SpotifyService.getAuthenticationRequest(AuthorizationResponse.Type.TOKEN)
+        AuthorizationClient.openLoginActivity(
+            this,
+            SpotifyConstants.AUTH_TOKEN_REQUEST_CODE,
+            request
+        )
     }
 
     fun onSongSearchSuccess() {

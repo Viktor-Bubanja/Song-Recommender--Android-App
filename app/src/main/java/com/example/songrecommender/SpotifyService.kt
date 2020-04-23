@@ -36,15 +36,17 @@ object SpotifyService {
     }
 
     fun setApi(accessToken: String?) {
-        this.api = SpotifyApi.spotifyClientApi(
-            SpotifyConstants.CLIENT_ID,
-            SpotifyConstants.CLIENT_SECRET,
-            SpotifyConstants.REDIRECT_URI
-        ) {
-            authorization {
-                tokenString = accessToken
-            }
-        }.build()
+        accessToken?.let {
+            this.api = SpotifyApi.spotifyClientApi(
+                SpotifyConstants.CLIENT_ID,
+                SpotifyConstants.CLIENT_SECRET,
+                SpotifyConstants.REDIRECT_URI
+            ) {
+                authorization {
+                    tokenString = accessToken
+                }
+            }.build()
+        }
     }
 
     fun isPlaying(): Boolean {
