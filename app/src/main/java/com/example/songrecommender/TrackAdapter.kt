@@ -23,7 +23,6 @@ class TrackAdapter(val context: Context,
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, i: Int) {
-        Log.d("AAA", tracks?.get(i)?.artists?.joinToString(", ") { it.name })
         holder.trackText.text = tracks?.get(i)?.name
         holder.artistText.text = tracks?.get(i)?.artists?.joinToString(", ") { it.name }
     }
