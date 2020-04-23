@@ -4,7 +4,17 @@
             "outputFile": "/Users/viktorbubanja/Desktop/SENG440/song-recommender/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/viktorbubanja/.gradle/caches/transforms-2/files-2.1/20e2877e95b4fd42b1e1134bf136de74/appcompat-1.0.0/res/values-v16/values-v16.xml",
+                    "source": "/Users/viktorbubanja/.gradle/caches/transforms-2/files-2.1/2ad9f1c0e0d3c45db058d2a1a66b7860/core-1.2.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/viktorbubanja/.gradle/caches/transforms-2/files-2.1/8346c3273d9c126a9c05cef941c87860/appcompat-1.1.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/viktorbubanja/.gradle/caches/transforms-2/files-2.1/2ad9f1c0e0d3c45db058d2a1a66b7860/core-1.2.0/res/values-v16/values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

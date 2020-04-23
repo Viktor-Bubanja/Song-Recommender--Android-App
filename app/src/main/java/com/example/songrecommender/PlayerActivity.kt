@@ -42,6 +42,9 @@ class PlayerActivity() : Activity() {
         }
 
         showPauseButton()
+        if (!SpotifyService.isPlaying()) {
+            ResumeTrack(SpotifyService.api).execute()
+        }
 
         playButton.setOnClickListener {
             if (SpotifyService.isPlaying()) {

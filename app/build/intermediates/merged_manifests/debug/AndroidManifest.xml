@@ -5,9 +5,10 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="18"
+        android:minSdkVersion="21"
         android:targetSdkVersion="28" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,7 +22,8 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.songrecommender.PlaylistActivity" />
+        <activity android:name="com.example.songrecommender.InstallSpotifyActivity" />
+        <activity android:name="com.example.songrecommender.QueueActivity" />
         <activity
             android:name="com.example.songrecommender.PlayerActivity"
             android:parentActivityName="com.example.songrecommender.MainActivity" />

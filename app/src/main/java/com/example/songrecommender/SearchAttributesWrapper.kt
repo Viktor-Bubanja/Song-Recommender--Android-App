@@ -4,8 +4,7 @@ import com.adamratzman.spotify.endpoints.public.TrackAttribute
 import com.adamratzman.spotify.endpoints.public.TuneableTrackAttribute
 
 
-class SearchAttributesWrapper(genre: String, emotion: Int, danceability: Int, acousticness: Int, var maxInput: Int) {
-    var genre: String = genre.toLowerCase()
+class SearchAttributesWrapper(var genre: String, emotion: Int, danceability: Int, acousticness: Int, var maxInput: Int) {
     val emotionAttribute: TrackAttribute<Float>? = createTrackAttribute(TuneableTrackAttribute.Valence, emotion)
     val danceabilityAttribute: TrackAttribute<Float>? = createTrackAttribute(TuneableTrackAttribute.Danceability, danceability)
     val acousticnessAttribute: TrackAttribute<Float>? = createTrackAttribute(TuneableTrackAttribute.Acousticness, acousticness)

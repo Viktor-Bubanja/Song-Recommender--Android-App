@@ -1,7 +1,12 @@
 package com.example.songrecommender
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var acousticSeekBar: SeekBar
 
     private lateinit var searchButton: Button
+
+    lateinit var selectedGenre: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +60,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         searchButton.setOnClickListener {
+            Log.d("AAA", selectedGenre)
             searchingToast?.show()
             val searchAttributes = SearchAttributesWrapper(
-                genreSpinner.selectedItem.toString(),
+                selectedGenre,
                 emotionSeekBar.progress,
                 danceSeekBar.progress,
                 acousticSeekBar.progress,
@@ -77,6 +85,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showPlayer() {
+        val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            vibrator.vibrate(200)
+        }
+
         val intent = Intent(this, PlayerActivity::class.java)
         searchingToast?.cancel()
         startActivity(intent)
@@ -99,17 +114,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createGenreDropdown() {
+        val genres = getGenres()
         genreSpinner = findViewById(R.id.genreSpinner)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.genres,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            genreSpinner.adapter = adapter
-        }
-    }
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, genres)
+        genreSpinner.adapter = arrayAdapter
 
+        genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                selectedGenre = genres[position].key
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+    }
 
     private fun initialiseUI() {
         emotionSeekBar = findViewById(R.id.emotionSeekBar)
@@ -128,6 +146,19 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.failed),
             Toast.LENGTH_LONG)
         createGenreDropdown()
+    }
+
+    private fun getGenres(): List<Genre> {
+        return listOf(
+            Genre(resources.getString(R.string.pop_id), resources.getString(R.string.pop)),
+            Genre(resources.getString(R.string.ambient_id), resources.getString(R.string.ambient)),
+            Genre(resources.getString(R.string.electronic_id), resources.getString(R.string.electronic)),
+            Genre(resources.getString(R.string.hip_hop_id), resources.getString(R.string.hip_hop)),
+            Genre(resources.getString(R.string.indie_pop_id), resources.getString(R.string.indie_pop)),
+            Genre(resources.getString(R.string.metal_id), resources.getString(R.string.metal)),
+            Genre(resources.getString(R.string.techno_id), resources.getString(R.string.techno)),
+            Genre(resources.getString(R.string.country_id), resources.getString(R.string.country))
+        )
     }
 
     companion object {

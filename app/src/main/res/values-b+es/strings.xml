@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">SongRecommender</string>
+    <string name="searching">Buscando…</string>
+    <string name="failed">¡No pude encontrar una canción! Inténtalo de nuevo</string>
+    <string name="search">Buscar</string>
+    <string name="spotify_not_installed">Instala Spotify para usar esta aplicación</string>
+    <string name="install">Instalar</string>
+
+    <string name="track_saved">Canción agregada a tus canciones favoritas</string>
+    <string name="track_removed">Canción eliminada de tus canciones favoritas</string>
+
+    <string name="genre">Género</string>
+    <string name="emotion">Emoción</string>
+    <string name="danceability">Bailable</string>
+    <string name="acoustic">Acústica</string>
+
+    <string name="sad">Triste</string>
+    <string name="happy">Feliz</string>
+    <string name="low">Baja</string>
+    <string name="high">Alta</string>
+    <string name="no">No</string>
+    <string name="yes">Si</string>
+
+    <string name="pop">Pop</string>
+    <string name="pop_id">pop</string>
+
+    <string name="ambient">Ambiente</string>
+    <string name="ambient_id">ambient</string>
+
+    <string name="electronic">Electrónica</string>
+    <string name="electronic_id">electronic</string>
+
+    <string name="hip_hop">Hip hop</string>
+    <string name="hip_hop_id">hip-hop</string>
+
+    <string name="indie_pop">Pop indie</string>
+    <string name="indie_pop_id">indie-pop</string>
+
+    <string name="metal">Metal</string>
+    <string name="metal_id">metal</string>
+
+    <string name="techno">Tecno</string>
+    <string name="techno_id">techno</string>
+
+    <string name="country">Country</string>
+    <string name="country_id">country</string>
+
+</resources>

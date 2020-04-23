@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">SongRecommender</string>
-    <string name="back">Back</string>
-    <string name="searching">Searching...</string>
+    <string name="searching">Searching…</string>
     <string name="failed">Couldn\'t find a song! Please try again</string>
     <string name="search">Search</string>
-    <string name="all_recommended_songs">All recommended songs</string>
     <string name="spotify_not_installed">Install Spotify to use this app</string>
     <string name="install">Install</string>
 
@@ -22,17 +20,30 @@
     <string name="high">High</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
-    <string name="pop">Pop</string>
 
-    <string-array name="genres">
-        <item>@string/pop</item>
-        <item>Ambient</item>
-        <item>Electronic</item>
-        <item>Hip-hop</item>
-        <item>Indie-pop</item>
-        <item>Metal</item>
-        <item>Techno</item>
-        <item>Country</item>
-    </string-array>
+    <string name="pop">Pop</string>
+    <string name="pop_id">pop</string>
+
+    <string name="ambient">Ambient</string>
+    <string name="ambient_id">ambient</string>
+
+    <string name="electronic">Electronic</string>
+    <string name="electronic_id">electronic</string>
+
+    <string name="hip_hop">Hip hop</string>
+    <string name="hip_hop_id">hip-hop</string>
+
+    <string name="indie_pop">Indie pop</string>
+    <string name="indie_pop_id">indie-pop</string>
+
+    <string name="metal">Metal</string>
+    <string name="metal_id">metal</string>
+
+    <string name="techno">Techno</string>
+    <string name="techno_id">techno</string>
+
+    <string name="country">Country</string>
+    <string name="country_id">country</string>
+
 
 </resources>
