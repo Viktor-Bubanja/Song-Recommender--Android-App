@@ -1,4 +1,0 @@
-# Referenced at /Users/viktorbubanja/Desktop/SENG440/song-recommender/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:13
--keep class androidx.core.app.CoreComponentFactory { <init>(); }
-# Referenced at /Users/viktorbubanja/Desktop/SENG440/song-recommender/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:13
--keep class androidx.multidex.MultiDexApplication { <init>(); }
